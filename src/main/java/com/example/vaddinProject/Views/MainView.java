@@ -27,14 +27,13 @@ public class MainView extends VerticalLayout {
     Button btndel=new Button("Delete Employee By Id");
     NumberField IDtoDelete=new NumberField("Enter the Id to delete");
     TextField Company=new TextField("Enter the Company");
-    TextField id=new TextField("Enter ID");
     TextField Location=new TextField("Enter the Location");
     TextField name=new TextField("Enter name");
     CheckboxGroup<String> checkboxGroup = new CheckboxGroup<>();
     public MainView(){
-         add(new Text("Hello World"));
-         Set();
-        add(new HorizontalLayout(Company,id,Location,name,checkboxGroup));
+
+        Set();
+        add(new HorizontalLayout(new VerticalLayout(Company,Location,name),checkboxGroup));
         add(btnSave);
         btnSave.addClickListener(e ->{
             AddEmployees();
@@ -45,6 +44,8 @@ public class MainView extends VerticalLayout {
         add(btndel);
         btndel.addClickListener(e->{
             employeeService.deleteEmployee(IDtoDelete.getValue().intValue());
+            ConfigureGrid();
+            add(grid);
         });
         btn.addClickListener(e -> {
             ConfigureGrid();
